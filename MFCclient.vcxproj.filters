@@ -33,6 +33,9 @@
     <ClInclude Include="clientDLL.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Choujiang.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MFCclient.cpp">
@@ -45,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="clientDLL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Choujiang.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

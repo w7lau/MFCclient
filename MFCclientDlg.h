@@ -42,4 +42,6 @@ public:
 	CComboBox cbox1;
 	CRichEditCtrl richedit2;
 	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton5();
 };

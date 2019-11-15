@@ -183,6 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Choujiang.h" />
     <ClInclude Include="clientDLL.h" />
     <ClInclude Include="MFCclient.h" />
     <ClInclude Include="MFCclientDlg.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Choujiang.cpp" />
     <ClCompile Include="clientDLL.cpp" />
     <ClCompile Include="MFCclient.cpp" />
     <ClCompile Include="MFCclientDlg.cpp" />

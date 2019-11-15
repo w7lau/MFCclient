@@ -8,7 +8,7 @@
 #include "MFCclient.h"
 #include "MFCclientDlg.h"
 #include "afxdialogex.h"
-
+#include"Choujiang.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -21,6 +21,7 @@ string sendcommd = "";
 string ID_name = "";
 string who_behaviour = "";
 vector<string> list_name;
+//Read_server rs;
 wstring string2wstring(string str)
 {
 	wstring result;
@@ -60,6 +61,8 @@ BEGIN_MESSAGE_MAP(CMFCclientDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &CMFCclientDlg::OnBnClickedButton2)
 	ON_EN_CHANGE(IDC_RICHEDIT21, &CMFCclientDlg::OnEnChangeRichedit21)
 	ON_BN_CLICKED(IDC_BUTTON4, &CMFCclientDlg::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON3, &CMFCclientDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON5, &CMFCclientDlg::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
 
@@ -169,10 +172,10 @@ void CMFCclientDlg::OnBnClickedButton2()
 void CMFCclientDlg::OnCbnSelchangeCombo1()
 {
 	int cul = cbox1.GetCurSel();
-	CString temp1;
-	ID_name = (CStringA)temp1;
-	cbox1.GetLBText(cul, temp1);
-	SetDlgItemTextW(IDC_RICHEDIT22, CString(temp1));
+	CString temp;
+	ID_name = (CStringA)temp;
+	cbox1.GetLBText(cul, temp);
+	SetDlgItemTextW(IDC_RICHEDIT22, CString(temp));
 }
 
 void CMFCclientDlg::OnBnClickedButton4()
@@ -185,7 +188,81 @@ void CMFCclientDlg::OnBnClickedButton4()
 	ID_name= (CStringA)temp;
 	Read_server rs;
 	rs.T_x();
-	//AfxMessageBox(_T("记录成功！了吧？"),_T("我好烦，我不想弄"));
-	::MessageBox(NULL, _T("记录成功！了吧？"), _T("不想弄"), MB_SYSTEMMODAL|MB_OK);
+	LPCTSTR k = _T("");
+	wstring temp1 = string2wstring(stk);
+	k = temp1.c_str();
+	::MessageBox(NULL, k, _T("小框框"), MB_SYSTEMMODAL|MB_OK);
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CMFCclientDlg::OnBnClickedButton3()
+{
+	Choujiang dlg;
+	Choujiang::CJData cjdata;
+	if (dlg.DoModal() != IDOK)
+	{
+		return;
+	}
+	
+	cjdata.ID = dlg.cjdata.ID;
+	cjdata.changci = dlg.cjdata.changci;
+	sendcommd = "choujiang";
+	ID_name = (CStringA)dlg.cjdata.ID;
+	who_behaviour = (CStringA)cjdata.changci;
+	Read_server rs;
+	rs.T_x();
+	LPCTSTR k = _T("");
+	wstring temp1 = string2wstring(stk);
+	k = temp1.c_str();
+	::MessageBox(NULL, k, dlg.cjdata.ID, MB_SYSTEMMODAL | MB_OK);
+	//CString Temp = &cdg.get_accValue;
+	// TODO: 在此添加控件通知处理程序代码//
+	if(stk=="服务器连接出小差啦！"|| stk == "可能卡了，重新点一下，可能被墙了，可能服务器没话费了")
+	{
+		return;
+	}
+	sendcommd = "cj_list";
+	rs.T_x();
+	wstring temp = string2wstring(stk);
+	k = temp.c_str();
+	SetDlgItemTextW(IDC_RICHEDIT21, k);
+	cbox1.ResetContent();
+	for (auto it = list_name.begin(); it != list_name.end(); it++)
+	{
+		temp = string2wstring(*it);
+		k = temp.c_str();
+		cbox1.AddString(k);
+	}
+}
+
+
+void CMFCclientDlg::OnBnClickedButton5()
+{
+	Choujiang dlg;
+	Choujiang::CJData cjdata;
+	if (dlg.DoModal() != IDOK)
+	{
+		return;
+	}
+
+	cjdata.ID = dlg.cjdata.ID;
+	cjdata.changci = dlg.cjdata.changci;
+	sendcommd = "cj_list";
+	ID_name = (CStringA)dlg.cjdata.ID;
+	who_behaviour = (CStringA)cjdata.changci;
+	Read_server rs;
+	rs.T_x();
+	LPCTSTR k = _T("");
+	// TODO: 在此添加控件通知处理程序代码
+	wstring temp = string2wstring(stk);
+	k = temp.c_str();
+	SetDlgItemTextW(IDC_RICHEDIT21, k);
+	cbox1.ResetContent();
+	for (auto it = list_name.begin(); it != list_name.end(); it++)
+	{
+		temp = string2wstring(*it);
+		k = temp.c_str();
+		cbox1.AddString(k);
+	}
 }
